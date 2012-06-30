@@ -5,8 +5,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List SimpleMailerTemplate', 'url'=>array('index')),
-	array('label'=>'Create SimpleMailerTemplate', 'url'=>array('create')),
+	array('label'=>'List Templates', 'url'=>array('index')),
+	array('label'=>'Create Template', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "

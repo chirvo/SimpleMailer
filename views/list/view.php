@@ -5,11 +5,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List SimpleMailerList', 'url'=>array('index')),
-	array('label'=>'Create SimpleMailerList', 'url'=>array('create')),
-	array('label'=>'Update SimpleMailerList', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete SimpleMailerList', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage SimpleMailerList', 'url'=>array('admin')),
+	array('label'=>'List Mailer Lists', 'url'=>array('index')),
+	array('label'=>'Create Mailer List', 'url'=>array('create')),
+	array('label'=>'Update Mailer List', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Delete Mailer List', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Manage Mailer Lists', 'url'=>array('admin')),
 );
 ?>
 

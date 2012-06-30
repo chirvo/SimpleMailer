@@ -1,7 +1,7 @@
 ﻿<?php
 /**
- * cron class file.
- * For running this from console simply type './yiic cron' from the protected/ directory
+ * mailer class file.
+ * For running this from console simply type './yiic mailer' from the protected/ directory
  */
 
 class MailerCommand extends CConsoleCommand

@@ -80,7 +80,7 @@ Installation instructions
 		...
 	),
 ```
-- Now access SimpleMailer via http://<your_project_ip_or_domain>/SimpleMailer/. You're done.
+- Now access SimpleMailer via http://your_app_ip_or_domain/SimpleMailer/. You're done.
 
 
 Usage:
@@ -90,9 +90,9 @@ The workflow of SimpleMailer can be resumed in these 10 simple steps:
 
 - *Step 1:* Create an email template: You can create it using any WYSIWYG HTML tool like Kompozer. Also you can use the
  MailChimp templates freely available at their site.
-- *Step 2:*Preview it in your HTML web browser. If it looks good for you then source it (by pressing Ctrl+U in your browser
+- *Step 2:* Preview it in your HTML web browser. If it looks good for you then source it (by pressing Ctrl+U in your browser
  window). Select it (Ctrl+A) and copy it (Ctrl+C).
-- *Step 3:* Go to http://<your_app_ip_or_domain>/SimpleMailer/ and click on 'Create SimpleMailerTemplate'.
+- *Step 3:* Go to http://your_app_ip_or_domain/SimpleMailer/ and click on 'Create SimpleMailerTemplate'.
 - *Step 4:* Fill in the form. The 'Name' field is important since you're gonna access this template by it.
 - *Step 5:* Select the 'Body' field and paste what you previously copied (Ctrl+V).
 - *Step 6:* Fill in the 'Alternative body' field with a text-only version of your email.
@@ -172,7 +172,7 @@ Follow these steps:
 ```
 
 - If it worked as expected, copy it.
-- Go to http://<your_app_ip_or_domain>/SimpleMailer/ and click on 'Create SimpleMailerList'.
+- Go to http://your_app_ip_or_domain/SimpleMailer/ and click on 'Create SimpleMailerList'.
 - Fill in the form. The 'Name' field is important since you're gonna access this List by it. Don't forget to paste your
   SQL sentence (you can omit the semicolon at the end of the sentence). Please, fetch just the email column from the
   database. Didn't test what happens if I try to fetch two or more columns. If you wanna experiment with it go ahead.

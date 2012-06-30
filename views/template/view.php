@@ -5,15 +5,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List SimpleMailerTemplate', 'url'=>array('index')),
-	array('label'=>'Create SimpleMailerTemplate', 'url'=>array('create')),
-	array('label'=>'Update SimpleMailerTemplate', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete SimpleMailerTemplate', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage SimpleMailerTemplate', 'url'=>array('admin')),
+	array('label'=>'List Templates', 'url'=>array('index')),
+	array('label'=>'Create Template', 'url'=>array('create')),
+	array('label'=>'Update Template', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Delete Template', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Manage Templates', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View SimpleMailerTemplate #<?php echo $model->id; ?></h1>
+<h1>View Template #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -25,9 +25,6 @@ $this->menu=array(
 		'subject',
 	),
 )); ?>
-
-<h4>HTML Preview</h4>
-<iframe width="650" height="650" style="border: 5px solid #fcfcfc; margin-left: 20px;" src="<?php echo $this->createUrl('preview', array('id' => $model->id)) ?>"></iframe>
 
 <h4>Send Preview</h4>
 <div class="campaign-admin">
@@ -42,6 +39,8 @@ $this->menu=array(
 	<?php echo CHtml::endForm(); ?>
 </div>
 
+<h4>HTML Preview</h4>
+<iframe width="650" height="650" style="border: 5px solid #fcfcfc; margin-left: 20px;" src="<?php echo $this->createUrl('preview', array('id' => $model->id)) ?>"></iframe>
 
 <script type="text/javascript">
 	$('#sure').on('click', function () {

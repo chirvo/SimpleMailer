@@ -5,8 +5,8 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-	array('label' => 'Delete SimpleMailerQueue', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
-	array('label' => 'Manage SimpleMailerQueue', 'url' => array('admin')),
+	array('label' => 'Delete Queued Element', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->id), 'confirm' => 'Are you sure you want to delete this item?')),
+	array('label' => 'Manage Queue', 'url' => array('admin')),
 );
 ?>
 

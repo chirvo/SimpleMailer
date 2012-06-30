@@ -4,8 +4,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create SimpleMailerTemplate', 'url'=>array('create')),
-	array('label'=>'Manage SimpleMailerTemplate', 'url'=>array('admin')),
+	array('label'=>'Create Template', 'url'=>array('create')),
+	array('label'=>'Manage Templates', 'url'=>array('admin')),
 );
 ?>
 

@@ -6,10 +6,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List SimpleMailerList', 'url'=>array('index')),
-	array('label'=>'Create SimpleMailerList', 'url'=>array('create')),
-	array('label'=>'View SimpleMailerList', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage SimpleMailerList', 'url'=>array('admin')),
+	array('label'=>'List Mailer Lists', 'url'=>array('index')),
+	array('label'=>'Create Mailer List', 'url'=>array('create')),
+	array('label'=>'View Mailer List', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Manage Mailer Lists', 'url'=>array('admin')),
 );
 ?>
 

@@ -5,7 +5,7 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-	array('label' => 'List SimpleMailerQueue', 'url' => array('index')),
+	array('label' => 'List Queue', 'url' => array('index')),
 );
 
 Yii::app()->clientScript->registerScript('search', "

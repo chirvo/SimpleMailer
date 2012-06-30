@@ -4,8 +4,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create SimpleMailerList', 'url'=>array('create')),
-	array('label'=>'Manage SimpleMailerList', 'url'=>array('admin')),
+	array('label'=>'Create Mailer List', 'url'=>array('create')),
+	array('label'=>'Manage Mailer Lists', 'url'=>array('admin')),
 );
 ?>
 

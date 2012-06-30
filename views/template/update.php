@@ -6,10 +6,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List SimpleMailerTemplate', 'url'=>array('index')),
-	array('label'=>'Create SimpleMailerTemplate', 'url'=>array('create')),
-	array('label'=>'View SimpleMailerTemplate', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage SimpleMailerTemplate', 'url'=>array('admin')),
+	array('label'=>'List Templates', 'url'=>array('index')),
+	array('label'=>'Create Template', 'url'=>array('create')),
+	array('label'=>'View Template', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Manage Templates', 'url'=>array('admin')),
 );
 ?>
 

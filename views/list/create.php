@@ -5,8 +5,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List SimpleMailerList', 'url'=>array('index')),
-	array('label'=>'Manage SimpleMailerList', 'url'=>array('admin')),
+	array('label'=>'List Mailer Lists', 'url'=>array('index')),
+	array('label'=>'Manage Mailer Lists', 'url'=>array('admin')),
 );
 ?>
 
