@@ -50,7 +50,7 @@ Installation instructions
 - Execute the following commands:
 
     cd /your/app/directory/protected
-    ./yiic migrate create add_simplemailer_tables --templateFile=application.modules.SimpleMailer.migrations.template
+    ./yiic migrate create --templateFile=application.modules.SimpleMailer.migrations.template add_simplemailer_tables
     ./yiic migrate up
     cp modules/SimpleMailer/commands/MailerCommand.php commands/
 
@@ -69,8 +69,8 @@ Installation instructions
 	'modules' => array(
 	    ...
 		'SimpleMailer' => array(
-		    'attachImages' => true; // This is the default value, for attaching the images used into the emails.
-		    'sendEmailLimit'=> 500; // Also the default value, how much emails should be sent when calling yiic mailer
+		    'attachImages' => true, // This is the default value, for attaching the images used into the emails.
+		    'sendEmailLimit'=> 500, // Also the default value, how much emails should be sent when calling yiic mailer
 		),
 		...
 	),

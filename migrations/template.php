@@ -17,13 +17,14 @@ class {ClassName} extends CDbMigration {
 			'to' => 'string NOT NULL',
 			'subject' => 'string NOT NULL',
 			'body' => 'text NOT NULL',
+			'headers' => 'text NOT NULL',
 			'status' => 'integer NOT NULL',
 			'create_time' => 'timestamp NULL',
 			'update_time' => 'timestamp NULL'
 		));
-		$this->createIndex('idx_sm_queue_to', 'sm_queue', 'to', true);
-		$this->createIndex('idx_sm_queue_subject', 'sm_queue', 'subject', true);
-		$this->createIndex('idx_sm_queue_status', 'sm_queue', 'status', true);
+		$this->createIndex('idx_sm_queue_to', 'sm_queue', 'to', false);
+		$this->createIndex('idx_sm_queue_subject', 'sm_queue', 'subject', false);
+		$this->createIndex('idx_sm_queue_status', 'sm_queue', 'status', false);
 
 		$this->createTable('sm_list', array(
 			'id' => 'pk',

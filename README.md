@@ -49,22 +49,22 @@ Installation instructions
 
 - Execute the following commands:
 
-	```bash
+```bash
     cd /your/app/directory/protected
     ./yiic migrate create --templateFile=application.modules.SimpleMailer.migrations.template add_simplemailer_tables
     ./yiic migrate up
     cp modules/SimpleMailer/commands/MailerCommand.php commands/
-	```
+```
 
 - Run 'crontab -e' and add the Mailer command:
 
-	```crontab
+```crontab
     0,30 * * * * /path/to/your/application/protected/yiic mailer #Send emails in queue every 30 minutes
-	```
+```
 
 - In your protected/config/main.php and protected/config.console.php add the following lines:
 
-	```php
+```php
 	'import' => array(
 	    ...
 		'application.modules.SimpleMailer.components.*',
@@ -79,7 +79,7 @@ Installation instructions
 		),
 		...
 	),
-	```
+```
 - Now access SimpleMailer via http://<your_project_ip_or_domain>/SimpleMailer/. You're done.
 
 
@@ -88,18 +88,18 @@ Usage:
 
 The workflow of SimpleMailer can be resumed in these 10 simple steps:
 
-1.- Create an email template: You can create it using any WYSIWYG HTML tool like Kompozer. Also you can use the
+- *Step 1:* Create an email template: You can create it using any WYSIWYG HTML tool like Kompozer. Also you can use the
  MailChimp templates freely available at their site.
-2.- Preview it in your HTML web browser. If it looks good for you then source it (by pressing Ctrl+U in your browser
+- *Step 2:*Preview it in your HTML web browser. If it looks good for you then source it (by pressing Ctrl+U in your browser
  window). Select it (Ctrl+A) and copy it (Ctrl+C).
-3.- Go to http://<your_app_ip_or_domain>/SimpleMailer/ and click on 'Create SimpleMailerTemplate'.
-4.- Fill in the form. The 'Name' field is important since you're gonna access this template by it.
-5.- Select the 'Body' field and paste what you previously copied (Ctrl+V).
-6.- Fill in the 'Alternative body' field with a text-only version of your email.
-7.- Click the 'Save' button.
-8.- Go to your desired controller action and write down the following lines:
+- *Step 3:* Go to http://<your_app_ip_or_domain>/SimpleMailer/ and click on 'Create SimpleMailerTemplate'.
+- *Step 4:* Fill in the form. The 'Name' field is important since you're gonna access this template by it.
+- *Step 5:* Select the 'Body' field and paste what you previously copied (Ctrl+V).
+- *Step 6:* Fill in the 'Alternative body' field with a text-only version of your email.
+- *Step 7:* Click the 'Save' button.
+- *Step 8:* Go to your desired controller action and write down the following lines:
 
-	```php
+```php
     $template_vars = array(
         //Put any variables you need to replace. the suggested format is '__KEY__' => 'value'. More about this below.
         '__username__' => 'John Doe',
@@ -108,11 +108,11 @@ The workflow of SimpleMailer can be resumed in these 10 simple steps:
     //If you want to enqueue the email for later sending just call SimpleMailer::enqueue() instead. Same params, please.
     //For list email sending read below.
     SimpleMailer::send('johndoe@example.com', 'template_name', $template_vars);
-	```
+```
 
-9.- Now access your action from your browser. After execution John Doe will receive a personalized email with a quote
+- *Step 9:* Now access your action from your browser. After execution John Doe will receive a personalized email with a quote
  for him.
-10.- Congratulate yourself. You made it. :)
+- *Step 10:* Congratulate yourself. You made it. :)
 
 
 About templates:
@@ -132,7 +132,7 @@ same format considerations explained above, called 'Template Partials'. Let's ex
 Clark Kent and Lois Lane are subscribed to the daily offers that appear on the Daily Planet (you're their web developer,
 of course). Then your code should look like this:
 
-	```php
+```php
     //This should return Lois and Clark.
     $users = User::model()->findByAttributes(array(
         'subscribed' => '1',
@@ -150,7 +150,7 @@ of course). Then your code should look like this:
         //You can also enqueue emails
         SimpleMailer::enqueue($user->profile->email, 'template_offers', $template_vars, $template_partials);
     }
-	```
+```
 
 Of course, there's a more practical way to achieve this. And now, enter the 'Lists'.
 
@@ -167,9 +167,9 @@ Follow these steps:
 
 - Connect to your SQL server and test the SQL sentence you want to use. An example could be:
 
-	```sql
+```sql
     SELECT email FROM profile WHERE location='atlantis';
-	```
+```
 
 - If it worked as expected, copy it.
 - Go to http://<your_app_ip_or_domain>/SimpleMailer/ and click on 'Create SimpleMailerList'.
@@ -178,10 +178,10 @@ Follow these steps:
   database. Didn't test what happens if I try to fetch two or more columns. If you wanna experiment with it go ahead.
 - Go to your desired controller action and write down the following lines:
 
-	```php
+```php
     //SimpleMailer::sendToList() enqueues all the messages being sent.
     SimpleMailer::sendToList('list_name', 'template_name', $template_partials);
-	```
+```
 
 - Now access your action from your browser. After execution your emails will be enqueued and will eventually being sent.
 
@@ -214,10 +214,10 @@ A: A template partial is a piece of HTML code that is going to be substituted ON
 Q: How can I reset the sm_queue table?
 A: I didn't execute these SQL commands yet, however they should work (uncle Google told me):
 
-	```sql
+```sql
        DELETE FROM sm_queue;
        ALTER TABLE sm_queue AUTO_INCREMENT=1
-	```
+```
 
    This will erase all your queued emails. You've been warned.
 
