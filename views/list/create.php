@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Simple Mailer Lists'=>array('index'),
+	'SimpleMailer Mailing Lists'=>array('index'),
 	'Create',
 );
 
 $this->menu=array(
-	array('label'=>'List Mailer Lists', 'url'=>array('index')),
-	array('label'=>'Manage Mailer Lists', 'url'=>array('admin')),
+	array('label'=>'List Mailing Lists', 'url'=>array('index')),
+	array('label'=>'Manage Mailing Lists', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create SimpleMailerList</h1>
+<h1>Create Mailing List</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

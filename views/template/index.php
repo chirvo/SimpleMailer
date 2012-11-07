@@ -9,7 +9,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Simple Mailer Templates</h1>
+<h1>Templates</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

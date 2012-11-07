@@ -39,6 +39,6 @@ class DefaultController extends Controller
 	}
 
 	public function actionTest() {
-		echo SimpleMailer::send('bigchirv@gmail.com', 'admin');
+		echo Mailer::send('bigchirv@gmail.com', 'admin');
 	}
 }

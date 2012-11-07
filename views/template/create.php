@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Simple Mailer Templates'=>array('index'),
+	'SimpleMailer Templates'=>array('index'),
 	'Create',
 );
 
@@ -10,6 +10,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create SimpleMailerTemplate</h1>
+<h1>Create Template</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

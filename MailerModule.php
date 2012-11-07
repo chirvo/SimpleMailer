@@ -1,6 +1,6 @@
 <?php
 
-class SimpleMailerModule extends CWebModule
+class MailerModule extends CWebModule
 {
 	public $attachImages = true;
 	public $sendEmailLimit = 500;
@@ -11,8 +11,8 @@ class SimpleMailerModule extends CWebModule
 
 		// import the module-level models and components
 		$this->setImport(array(
-			'SimpleMailer.models.*',
-			'SimpleMailer.components.*',
+			'mailer.models.*',
+			'mailer.components.*',
 		));
 	}
 

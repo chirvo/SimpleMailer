@@ -18,29 +18,29 @@ class MailerCommand extends CConsoleCommand
 			$logger->detachEventHandler('onFlush', array(Yii::app()->log, 'collectLogs'));
 			$logger->attachEventHandler('onFlush', array($this, 'processLogs'));
 
-			echo 'Limit: ' . Yii::app()->getModule('SimpleMailer')->sendEmailLimit . "\n";
+			echo 'Limit: ' . Yii::app()->getModule('mailer')->sendEmailLimit . "\n";
 			/**
-			 * @var $emails SimpleMailerQueue
+			 * @var $emails MailerQueue
 			 */
-			$emails = SimpleMailerQueue::model()->findAllByAttributes(
+			$emails = MailerQueue::model()->findAllByAttributes(
 				array(
-					'status' => SimpleMailerQueue::STATUS_NOT_SENT,
+					'status' => MailerQueue::STATUS_NOT_SENT,
 				),
 				array(
-					'limit' => Yii::app()->getModule('SimpleMailer')->sendEmailLimit,
+					'limit' => Yii::app()->getModule('mailer')->sendEmailLimit,
 				)
 			);
 
 			echo 'Count: ' . count($emails) . "\n";
 
 			if (!$emails) {
-				Yii::log(Yii::t('mailer', 'No emails in queue. Exiting.'), 'error', 'application.commands.MailerCommand');
+				Yii::log(Yii::t('mailer', 'No emails in queue. Exiting.'), 'warn', 'application.commands.MailerCommand');
 				exit(0);
 			}
 
 			foreach ($emails as $email) {
 				if (mail($email->to, $email->subject, $email->body, $email->headers)) {
-					$email->status = SimpleMailerQueue::STATUS_SENT;
+					$email->status = MailerQueue::STATUS_SENT;
 					$email->save();
 					echo 'Sent: ' . $email->to . "\n";
 				}

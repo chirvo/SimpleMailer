@@ -37,15 +37,6 @@
 		<?php echo $form->labelEx($model, 'body'); ?>
 		<?php echo $form->textArea($model, 'body', array('rows' => 15, 'cols' => 50, 'style' => 'width: 665px;')); ?>
 		<?php echo $form->error($model, 'body'); ?>
-		<?php
-/*		$this->widget('ext.elrte.elRTE', array(
-			'selector' => 'SimpleMailerTemplate_body',
-			'height' => '600',
-			'width' => '680',
-			'absoluteURLs' => true,
-			'toolbar' => 'maxi',
-		));*/
-		?>
 	</div>
 	<div class="row">
 		<?php echo $form->labelEx($model, 'alternative_body'); ?>

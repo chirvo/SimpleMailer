@@ -44,10 +44,11 @@ $this->menu=array(
 
 <script type="text/javascript">
 	$('#sure').on('click', function () {
+        var sendMailCheckbox = $('#sendmail');
 		if ($(this).is(':checked')) {
-			$('#sendmail').removeAttr('disabled');
+			sendMailCheckbox.removeAttr('disabled');
 		} else {
-			$('#sendmail').attr('disabled', 'disabled');
+			sendMailCheckbox.attr('disabled', 'disabled');
 		}
 	});
 </script>

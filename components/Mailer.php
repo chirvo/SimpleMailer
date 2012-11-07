@@ -6,23 +6,23 @@
  * Time: 10:35 PM
  * To change this template use File | Settings | File Templates.
  */
-class SimpleMailer extends CComponent
+class Mailer extends CComponent
 {
 	/**
 	 * Heavily based on http://stackoverflow.com/questions/1606588/how-to-attach-and-show-image-in-mail-using-php and
 	 * http://www.phpeveryday.com/articles/PHP-Email-Using-Embedded-Images-in-HTML-Email-P113.html
-	 * @param SimpleMailerTemplate $template the template instance
+	 * @param MailerTemplate $template the template instance
 	 * @param array $template_partials HTML code to be inserted in the email. array('__key_for_partial__' => '<h1>html</h1>').
 	 *        Defaults to array();
 	 * @return array Contents: array( 'multipart'=> string multipart_data, 'header' => string mail_header)
 	 * @throws CException
 	 */
 	public static function compileMultipartTemplate($template, $template_partials = array()) {
-		$attach_images = Yii::app()->getModule('SimpleMailer')->attachImages;
-		if (!is_a($template, 'SimpleMailerTemplate')) {
-			throw new CException('SimpleMailer::compileMultipartTemplate(): '. Yii::t(
+		$attach_images = Yii::app()->getModule('mailer')->attachImages;
+		if (!is_a($template, 'MailerTemplate')) {
+			throw new CException('Mailer::compileMultipartTemplate(): '. Yii::t(
 				'mailer',
-				'Wrong object passed, expected SimpleMailerTemplate instance.'
+				'Wrong object passed, expected MailerTemplate instance.'
 			));
 		}
 		if (is_array($template_partials) && !empty($template_partials))
@@ -76,7 +76,7 @@ class SimpleMailer extends CComponent
 				if (file_exists($path['path']))
 					$fp = fopen($path['path'], "r");
 				if (!$fp) {
-					throw new CException('SimpleMailer::compileMultipartTemplate(): '. Yii::t(
+					throw new CException('Mailer::compileMultipartTemplate(): '. Yii::t(
 						'mailer',
 						'Cannot open file ')
 					. $path['path']);
@@ -134,8 +134,8 @@ class SimpleMailer extends CComponent
 		if (is_string($to)) {
 			$to = array($to);
 		}
-		/** @var $template SimpleMailerTemplate */
-		$template = SimpleMailerTemplate::model()->findByAttributes(array(
+		/** @var $template MailerTemplate */
+		$template = MailerTemplate::model()->findByAttributes(array(
 			'name' => $template_name,
 		));
 		if (!$template) {
@@ -145,34 +145,43 @@ class SimpleMailer extends CComponent
 		//Template compilation
 		$compiled_template = self::compileMultipartTemplate($template, $template_partials);
 
-		//Then substitute the template variables with actual data
-		if (is_array($template_vars) && !empty($template_vars))
-			$body = strtr($compiled_template['multipart'], $template_vars);
-		else
-			$body = $compiled_template['multipart'];
+		// If $template_vars is an associative array, we 'fix' it putting it into a numeric array
+		// Code taken from http://php.net/manual/en/function.is-array.php, Anonymous comment on 2009-05-16
+		if(is_array($template_vars) && !empty($template_vars) && 0 !== count(array_diff_key($template_vars, array_keys(array_keys($template_vars))))) {
+			$cool_swap_array[] = $template_vars;
+			$template_vars = $cool_swap_array;
+		}
 
 		$statuses = array();
+		$i = 0;
 		foreach ($to as $receiver) {
+			//Substitute the template variables with actual data
+			if ($template_vars)
+				$body = strtr($compiled_template['multipart'], $template_vars[$i]); //$template_vars[$i] should always match to $to[$i]
+			else
+				$body = $compiled_template['multipart'];
+
 			switch ($action) {
 				case 'send':
 					$statuses[$receiver] = mail($receiver, $template->subject, $body, $compiled_template['headers']);
 					break;
 				case 'enqueue':
-					$queue = new SimpleMailerQueue;
+					$queue = new MailerQueue;
 					$queue->to = $receiver;
 					$queue->subject = $template->subject;
 					$queue->body = $body;
 					$queue->headers = $compiled_template['headers'];
-					$queue->status = SimpleMailerQueue::STATUS_NOT_SENT;
+					$queue->status = MailerQueue::STATUS_NOT_SENT;
 					$statuses[$receiver] = $queue->save();
 					break;
 				default:
 					break;
 			}
+			$i++;
 		}
 		foreach ($statuses as $email => $status) {
 			if (!$status) {
-				Yii::log(Yii::t('app', 'Failed to deliver for some emails.'), 'error');
+				Yii::log(Yii::t('app', 'Failed delivering some emails.'), 'error');
 				return false;
 			}
 		}
@@ -194,7 +203,7 @@ class SimpleMailer extends CComponent
 	/**
 	 * @static
 	 * @param $to
-	 * @param $template_name - The SimpleMailerTemplate template name
+	 * @param $template_name - The MailerTemplate template name
 	 * @param array $template_vars - '__key__' => 'value' to be replaced
 	 * @param array $template_partials - '__key__' => 'HTML code' to be replaced into the email template
 	 * @return bool
@@ -205,25 +214,36 @@ class SimpleMailer extends CComponent
 
 	/**
 	 * @static
-	 * @param $list_name - The SimpleMailerList list name
-	 * @param $template_name - The SimpleMailerTemplate template name
+	 * @param $list_name - The MailerList list name
+	 * @param $template_name - The MailerTemplate template name
 	 * @param array $template_partials - '__key__' => 'HTML code' to be replaced into the email template
 	 * @throws CException
 	 */
 	public static function sendToList($list_name, $template_name, $template_partials = array()) {
 		$db = Yii::app()->db;
-		$list = SimpleMailerList::model()->findByAttributes(array(
+		$list = MailerList::model()->findByAttributes(array(
 			'name' => $list_name,
 		));
-		if (!$list) {
-			throw new CException('SimpleMailer::sendToList(): ' . Yii::t('mailer', "List doesn't exists."));
-		}
+		if (!$list)
+			throw new CException('Mailer::sendToList(): ' . Yii::t('mailer', "List doesn't exists."));
 
 		try {
-			$to = $db->createCommand($list->query)->queryColumn();
-			self::enqueue($to, $template_name, array(), $template_partials);
+			$to = array();
+			$template_vars = array();
+			$results = $db->createCommand($list->query)->queryAll();
+			foreach ($results as $result) {
+				$to[] = $result[$list->email_field];
+				$template_vars_iteration = array();
+				foreach (array_keys($result) as $key) {
+					// We're forcing the '__placeholder__' format. I need a way to make this more flexible.
+					// Suggestions are welcomed.
+					$template_vars_iteration['__' . $key . '__'] = $result[$key];
+				}
+				$template_vars[] = $template_vars_iteration;
+			}
+			self::enqueue($to, $template_name, $template_vars, $template_partials);
 		} catch (Exception $e) {
-			throw new CException("SimpleMailer::sendToList(): " . $e->getMessage());
+			throw new CException("Mailer::sendToList(): " . $e->getMessage());
 		}
 	}
 }

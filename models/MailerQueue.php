@@ -11,7 +11,7 @@
  * @property string $headers
  * @property integer $status
  */
-class SimpleMailerQueue extends CActiveRecord
+class MailerQueue extends CActiveRecord
 {
 	const STATUS_NOT_SENT = 0;
 	const STATUS_SENT = 1;

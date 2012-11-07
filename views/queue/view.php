@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-	'Simple Mailer Queues' => array('index'),
+	'SimpleMailer Mail Queue' => array('index'),
 	$model->id,
 );
 
@@ -10,7 +10,7 @@ $this->menu = array(
 );
 ?>
 
-<h1>View SimpleMailerQueue #<?php echo $model->id; ?></h1>
+<h1>View Mailer Queue Element #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data' => $model,

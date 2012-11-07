@@ -11,12 +11,12 @@
  * @property string $subject
  * @property string $body
  */
-class SimpleMailerTemplate extends CActiveRecord
+class MailerTemplate extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return SimpleMailerTemplate the static model class
+	 * @return MailerTemplate the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

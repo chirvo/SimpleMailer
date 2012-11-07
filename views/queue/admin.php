@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-	'Simple Mailer Queues' => array('index'),
+	'SimpleMailer Mail Queue' => array('index'),
 	'Manage',
 );
 
@@ -22,7 +22,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Simple Mailer Queues</h1>
+<h1>Manage Mailer Queue</h1>
 
 <p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>

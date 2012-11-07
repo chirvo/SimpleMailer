@@ -58,13 +58,13 @@ class ListController extends Controller
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate() {
-		$model = new SimpleMailerList;
+		$model = new MailerList;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['SimpleMailerList'])) {
-			$model->attributes = $_POST['SimpleMailerList'];
+		if (isset($_POST['MailerList'])) {
+			$model->attributes = $_POST['MailerList'];
 			if ($model->save())
 				$this->redirect(array('view', 'id' => $model->id));
 		}
@@ -85,8 +85,8 @@ class ListController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['SimpleMailerList'])) {
-			$model->attributes = $_POST['SimpleMailerList'];
+		if (isset($_POST['MailerList'])) {
+			$model->attributes = $_POST['MailerList'];
 			if ($model->save())
 				$this->redirect(array('view', 'id' => $model->id));
 		}
@@ -118,7 +118,7 @@ class ListController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex() {
-		$dataProvider = new CActiveDataProvider('SimpleMailerList');
+		$dataProvider = new CActiveDataProvider('MailerList');
 		$this->render('index', array(
 			'dataProvider' => $dataProvider,
 		));
@@ -128,10 +128,10 @@ class ListController extends Controller
 	 * Manages all models.
 	 */
 	public function actionAdmin() {
-		$model = new SimpleMailerList('search');
+		$model = new MailerList('search');
 		$model->unsetAttributes(); // clear any default values
-		if (isset($_GET['SimpleMailerList']))
-			$model->attributes = $_GET['SimpleMailerList'];
+		if (isset($_GET['MailerList']))
+			$model->attributes = $_GET['MailerList'];
 
 		$this->render('admin', array(
 			'model' => $model,
@@ -144,7 +144,7 @@ class ListController extends Controller
 	 * @param integer the ID of the model to be loaded
 	 */
 	public function loadModel($id) {
-		$model = SimpleMailerList::model()->findByPk($id);
+		$model = MailerList::model()->findByPk($id);
 		if ($model === null)
 			throw new CHttpException(404, 'The requested page does not exist.');
 		return $model;

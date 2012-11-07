@@ -10,12 +10,12 @@
  * @property string $query
  * @property string $email_field
  */
-class SimpleMailerList extends CActiveRecord
+class MailerList extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return SimpleMailerList the static model class
+	 * @return MailerList the static model class
 	 */
 	public static function model($className = __CLASS__) {
 		return parent::model($className);

@@ -69,13 +69,13 @@ class TemplateController extends Controller
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate() {
-		$model = new SimpleMailerTemplate;
+		$model = new MailerTemplate;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['SimpleMailerTemplate'])) {
-			$model->attributes = $_POST['SimpleMailerTemplate'];
+		if (isset($_POST['MailerTemplate'])) {
+			$model->attributes = $_POST['MailerTemplate'];
 			if ($model->save())
 				$this->redirect(array('view', 'id' => $model->id));
 		}
@@ -96,8 +96,8 @@ class TemplateController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if (isset($_POST['SimpleMailerTemplate'])) {
-			$model->attributes = $_POST['SimpleMailerTemplate'];
+		if (isset($_POST['MailerTemplate'])) {
+			$model->attributes = $_POST['MailerTemplate'];
 			if ($model->save())
 				$this->redirect(array('view', 'id' => $model->id));
 		}
@@ -129,7 +129,7 @@ class TemplateController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex() {
-		$dataProvider = new CActiveDataProvider('SimpleMailerTemplate');
+		$dataProvider = new CActiveDataProvider('MailerTemplate');
 		$this->render('index', array(
 			'dataProvider' => $dataProvider,
 		));
@@ -139,10 +139,10 @@ class TemplateController extends Controller
 	 * Manages all models.
 	 */
 	public function actionAdmin() {
-		$model = new SimpleMailerTemplate('search');
+		$model = new MailerTemplate('search');
 		$model->unsetAttributes(); // clear any default values
-		if (isset($_GET['SimpleMailerTemplate']))
-			$model->attributes = $_GET['SimpleMailerTemplate'];
+		if (isset($_GET['MailerTemplate']))
+			$model->attributes = $_GET['MailerTemplate'];
 
 		$this->render('admin', array(
 			'model' => $model,
@@ -155,7 +155,7 @@ class TemplateController extends Controller
 	 * @param integer the ID of the model to be loaded
 	 */
 	public function loadModel($id) {
-		$model = SimpleMailerTemplate::model()->findByPk($id);
+		$model = MailerTemplate::model()->findByPk($id);
 		if ($model === null)
 			throw new CHttpException(404, 'The requested page does not exist.');
 		return $model;
@@ -174,7 +174,7 @@ class TemplateController extends Controller
 
 	public function actionSendPreview($email, $template, $id) {
 		try {
-			SimpleMailer::send($email, $template, array(
+			Mailer::send($email, $template, array(
 				'__username__' => 'John Doe',
 				'__activation_url__' => Yii::app()->request->hostInfo
 					. '/registration/activation?user=johndoe&key=xxxxxxxxxxxxxxxxxxxxxxxxxx',

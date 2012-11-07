@@ -51,9 +51,9 @@ Installation instructions
 
 ```bash
     cd /your/app/directory/protected
-    ./yiic migrate create --templateFile=application.modules.SimpleMailer.migrations.template add_simplemailer_tables
+    ./yiic migrate create --templateFile=application.modules.mailer.migrations.template add_simplemailer_tables
     ./yiic migrate up
-    cp modules/SimpleMailer/commands/MailerCommand.php commands/
+    cp modules/mailer/commands/MailerCommand.php commands/
 ```
 
 - Run 'crontab -e' and add the Mailer command:
@@ -67,20 +67,20 @@ Installation instructions
 ```php
 	'import' => array(
 	    ...
-		'application.modules.SimpleMailer.components.*',
-		'application.modules.SimpleMailer.models.*',
+		'application.modules.mailer.components.*',
+		'application.modules.mailer.models.*',
 		...
 	),
 	'modules' => array(
 	    ...
-		'SimpleMailer' => array(
+		'mailer' => array(
 		    'attachImages' => true, // This is the default value, for attaching the images used into the emails.
 		    'sendEmailLimit'=> 500, // Also the default value, how much emails should be sent when calling yiic mailer
 		),
 		...
 	),
 ```
-- Now access SimpleMailer via http://your_app_ip_or_domain/SimpleMailer/. You're done.
+- Now access SimpleMailer via http://your_app_ip_or_domain/mailer/. You're done.
 
 
 Usage:
@@ -92,7 +92,7 @@ The workflow of SimpleMailer can be resumed in these 10 simple steps:
  MailChimp templates freely available at their site.
 - *Step 2:* Preview it in your HTML web browser. If it looks good for you then source it (by pressing Ctrl+U in your browser
  window). Select it (Ctrl+A) and copy it (Ctrl+C).
-- *Step 3:* Go to http://your_app_ip_or_domain/SimpleMailer/ and click on 'Create SimpleMailerTemplate'.
+- *Step 3:* Go to http://your_app_ip_or_domain/mailer/ and click on 'Create Template'.
 - *Step 4:* Fill in the form. The 'Name' field is important since you're gonna access this template by it.
 - *Step 5:* Select the 'Body' field and paste what you previously copied (Ctrl+V).
 - *Step 6:* Fill in the 'Alternative body' field with a text-only version of your email.
@@ -105,9 +105,9 @@ The workflow of SimpleMailer can be resumed in these 10 simple steps:
         '__username__' => 'John Doe',
         '__quote__' => 'Roses are red, Violets are blue. Sugar is sweet, Who the hell are you?',
     );
-    //If you want to enqueue the email for later sending just call SimpleMailer::enqueue() instead. Same params, please.
+    //If you want to enqueue the email for later sending just call Mailer::enqueue() instead. Same params, please.
     //For list email sending read below.
-    SimpleMailer::send('johndoe@example.com', 'template_name', $template_vars);
+    Mailer::send('johndoe@example.com', 'template_name', $template_vars);
 ```
 
 - *Step 9:* Now access your action from your browser. After execution John Doe will receive a personalized email with a quote
@@ -120,12 +120,12 @@ About templates:
 There's no specific rules to set your template variables in your templates except that the characters used must be in
 the [a-zA-Z0-9_] range (that means numbers, letters, and underscore).
 
-I use the '__variable__' format (two underscores, the variable name in lowercase and two underscores more), however you
+I use the '__placeholder__' format (two underscores, the variable name in lowercase and two underscores more), however you
 can use any other format you like if it meets the range requirement (010101VARIABLE010101 will do it but it is
 unreadable. You got the point).
 
 Whatever format you choose to use, keep in mind that you need to pass your '__variables__' => 'value' array to the
-SimpleMailer::send() or SimpleMailer::enqueue() function.
+Mailer::send() or Mailer::enqueue() function.
 
 The module also allows you to add dynamic generated content to the template. This is done using another array with the
 same format considerations explained above, called 'Template Partials'. Let's explain this with an example. Suppose
@@ -148,7 +148,7 @@ of course). Then your code should look like this:
             '__username__' => $user->profile->firstName . ' ' . $user->profile->lastName;
         );
         //You can also enqueue emails
-        SimpleMailer::enqueue($user->profile->email, 'template_offers', $template_vars, $template_partials);
+        Mailer::enqueue($user->profile->email, 'template_offers', $template_vars, $template_partials);
     }
 ```
 
@@ -172,15 +172,15 @@ Follow these steps:
 ```
 
 - If it worked as expected, copy it.
-- Go to http://your_app_ip_or_domain/SimpleMailer/ and click on 'Create SimpleMailerList'.
+- Go to http://your_app_ip_or_domain/mailer/ and click on 'Create Mailing List'.
 - Fill in the form. The 'Name' field is important since you're gonna access this List by it. Don't forget to paste your
   SQL sentence (you can omit the semicolon at the end of the sentence). Please, fetch just the email column from the
   database. Didn't test what happens if I try to fetch two or more columns. If you wanna experiment with it go ahead.
 - Go to your desired controller action and write down the following lines:
 
 ```php
-    //SimpleMailer::sendToList() enqueues all the messages being sent.
-    SimpleMailer::sendToList('list_name', 'template_name', $template_partials);
+    //Mailer::sendToList() enqueues all the messages being sent.
+    Mailer::sendToList('list_name', 'template_name', $template_partials);
 ```
 
 - Now access your action from your browser. After execution your emails will be enqueued and will eventually being sent.
@@ -196,13 +196,29 @@ FAQ:
 ====
 
 Q: I followed all the steps to install this module but I can't send email. Why?
+
 A: Be sure you (or the System Administrator of the company you work for) configured properly a MTA in your server
    (lets say Postfix). This needs a little knowledge of system administration but as usual you can google the steps
    to do such configuration. This also will improve the response time of your PHP scripts when sending email.
 
    You won't be able to send emails until you configure your MTA. Period.
 
+
+Q: I followed the install instructions to the letter but I can't access it via
+   http://your_app_ip_or_domain/mailer. What's wrong?
+
+A: Be sure that you didn't set the "caseSensitive" parameter of the "urlManager"
+   component to 'false' in your configuration. If you did it, you won't access
+   SimpleMailer the usual way. The solutions for this issue are: a) set "caseSensitive"
+   to 'true' (the default value) or b) rename the SimpleMailer directory and change
+   all the Yii path routes in the code. Option a) is easier. If neither a) or b) are
+   solutions for you then please c) wait until I come up with a permanent fix for this.
+
+   A special thanks to yugene@Yii forums for pinpoint and solve the issue.
+
+
 Q: What's the difference between a template variable and a template partial?
+
 A: A template partial is a piece of HTML code that is going to be substituted ONCE, when compiling a template. It's a
    dynamic text that you want to change every time you send an email to a bunch of people without modifying the entire
    template. I.E. the today's offers that changes every day and you want to keep all members of your list up to date.
@@ -211,7 +227,9 @@ A: A template partial is a piece of HTML code that is going to be substituted ON
    Template variables are related to the user who is receiving the email. This variables are used for personalizing the
    email with specific information of the user.
 
+
 Q: How can I reset the sm_queue table?
+
 A: I didn't execute these SQL commands yet, however they should work (uncle Google told me):
 
 ```sql
@@ -221,18 +239,26 @@ A: I didn't execute these SQL commands yet, however they should work (uncle Goog
 
    This will erase all your queued emails. You've been warned.
 
+
 Q: I think I've found a bug. What should I do?
+
 A: Fix it, make a patch and send it to me. :) Or at least report it in the SimpleMailer extension page. I will try
    to fix it as soon as I can. The same thing goes to suggestions or improvements.
 
+
 Q: Why is your English so funny?
+
 A: I'm not a native English speaker. I do speak some English, but my native language is Spanish. And if you think
    my English is funny you have to hear me trying to utter words in German or Russian. You will laugh your arse off.
    For sure.
 
+
 Q: Do you have Twitter/Facebook/Email?
+
 A: Yes I do.
 
+
 Q: I have another question regarding this extension that is not in this FAQ. How can I contact you?
+
 A: You can leave me a message here or at the Yii Forum SimpleMailer page.
 

@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Simple Mailer Lists',
+	'SimpleMailer Mailing Lists',
 );
 
 $this->menu=array(
-	array('label'=>'Create Mailer List', 'url'=>array('create')),
-	array('label'=>'Manage Mailer Lists', 'url'=>array('admin')),
+	array('label'=>'Create Mailing List', 'url'=>array('create')),
+	array('label'=>'Manage Mailing Lists', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Simple Mailer Lists</h1>
+<h1>Mailing Lists</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

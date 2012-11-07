@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Simple Mailer Lists'=>array('index'),
+	'SimpleMailer Mailing Lists'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List Mailer Lists', 'url'=>array('index')),
-	array('label'=>'Create Mailer List', 'url'=>array('create')),
+	array('label'=>'List Mailing Lists', 'url'=>array('index')),
+	array('label'=>'Create Mailing List', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Simple Mailer Lists</h1>
+<h1>Manage Mailing Lists</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
