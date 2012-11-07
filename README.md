@@ -97,9 +97,9 @@ The workflow of SimpleMailer can be resumed in these 10 simple steps:
 			'__username__' => 'John Doe',
 			'__quote__' => 'Roses are red, Violets are blue. Sugar is sweet, Who the hell are you?',
 			);
-//If you want to enqueue the email for later sending just call Mailer::enqueue() instead. Same params, please.
-//For list email sending read below.
-Mailer::send('johndoe@example.com', 'template_name', $template_vars);
+    //If you want to enqueue the email for later sending just call Mailer::enqueue() instead. Same params, please.
+    //For list email sending read below.
+    Mailer::send('johndoe@example.com', 'template_name', $template_vars);
 ```
 
 - *Step 9:* Now access your action from your browser. After execution John Doe will receive a personalized email with a quote
