@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Simple Mailer Lists'=>array('index'),
+	'SimpleMailer Lists'=>array('index'),
 	$model->name=>array('view','id'=>$model->id),
 	'Update',
 );

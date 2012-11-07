@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Simple Mailer Templates'=>array('index'),
+	'SimpleMailer Templates'=>array('index'),
 	$model->name,
 );
 

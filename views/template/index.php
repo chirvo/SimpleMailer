@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs=array(
-	'Simple Mailer Templates',
+	'SimpleMailer Templates',
 );
 
 $this->menu=array(
