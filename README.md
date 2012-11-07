@@ -74,24 +74,24 @@ cp modules/mailer/commands/MailerCommand.php commands/
 			...
 			),
 ```
-	- Now access SimpleMailer via http://your_app_ip_or_domain/mailer/. You're done.
+- Now access SimpleMailer via http://your_app_ip_or_domain/mailer/. You're done.
 
 
-	Usage:
-	======
+Usage:
+======
 
-	The workflow of SimpleMailer can be resumed in these 10 simple steps:
+The workflow of SimpleMailer can be resumed in these 10 simple steps:
 
-	- *Step 1:* Create an email template: You can create it using any WYSIWYG HTML tool like Kompozer. Also you can use the MailChimp templates freely available at their site.
-	- *Step 2:* Preview it in your HTML web browser. If it looks good for you then source it (by pressing Ctrl+U in your browser window). Select it (Ctrl+A) and copy it (Ctrl+C).
-	- *Step 3:* Go to http://your_app_ip_or_domain/mailer/ and click on 'Create Template'.
-	- *Step 4:* Fill in the form. The 'Name' field is important since you're gonna access this template by it.
-	- *Step 5:* Select the 'Body' field and paste what you previously copied (Ctrl+V).
-	- *Step 6:* Fill in the 'Alternative body' field with a text-only version of your email.
-	- *Step 7:* Click the 'Save' button.
-	- *Step 8:* Go to your desired controller action and write down the following lines:
+- *Step 1:* Create an email template: You can create it using any WYSIWYG HTML tool like Kompozer. Also you can use the MailChimp templates freely available at their site.
+- *Step 2:* Preview it in your HTML web browser. If it looks good for you then source it (by pressing Ctrl+U in your browser window). Select it (Ctrl+A) and copy it (Ctrl+C).
+- *Step 3:* Go to http://your_app_ip_or_domain/mailer/ and click on 'Create Template'.
+- *Step 4:* Fill in the form. The 'Name' field is important since you're gonna access this template by it.
+- *Step 5:* Select the 'Body' field and paste what you previously copied (Ctrl+V).
+- *Step 6:* Fill in the 'Alternative body' field with a text-only version of your email.
+- *Step 7:* Click the 'Save' button.
+- *Step 8:* Go to your desired controller action and write down the following lines:
 
-	```php
+```php
 	$template_vars = array(
 			//Put any variables you need to replace. the suggested format is '__KEY__' => 'value'. More about this below.
 			'__username__' => 'John Doe',
