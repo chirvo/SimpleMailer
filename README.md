@@ -73,7 +73,7 @@ cp modules/mailer/commands/MailerCommand.php commands/
 				),
 			...
 			),
-	```
+```
 	- Now access SimpleMailer via http://your_app_ip_or_domain/mailer/. You're done.
 
 
@@ -208,17 +208,17 @@ Q: How can I reset the sm_queue table?
 
 A: I didn't execute these SQL commands yet, however they should work (uncle Google told me):
 
-	```sql
+```sql
 	DELETE FROM sm_queue;
 	ALTER TABLE sm_queue AUTO_INCREMENT=1
-	```
+```
 
 
 	Alternatively you can use also:
 
-	```sql
+```sql
 	TRUNCATE sm_queue;
-	```
+```
 
 
 	This will erase all your queued emails. You've been warned.
