@@ -208,38 +208,31 @@ Q: How can I reset the sm_queue table?
 
 A: I didn't execute these SQL commands yet, however they should work (uncle Google told me):
 
-```sql
-	DELETE FROM sm_queue;
-	ALTER TABLE sm_queue AUTO_INCREMENT=1
-```
-
-
-	Alternatively you can use also:
 
 ```sql
 	TRUNCATE sm_queue;
 ```
 
 
-	This will erase all your queued emails. You've been warned.
+This will erase all your queued emails. You've been warned.
 
 
-	Q: I think I've found a bug. What should I do?
+Q: I think I've found a bug. What should I do?
 
-	A: Fix it, make a patch and send it to me. :) Or at least report it in the SimpleMailer extension page. I will try to fix it as soon as I can. The same thing goes to suggestions or improvements.
-
-
-	Q: Why is your English so funny?
-
-	A: I'm not a native English speaker. I do speak some English, but my native language is Spanish. And if you think my English is funny you have to hear me trying to utter words in German or Russian. You will laugh your arse off. For sure.
+A: Fix it, make a patch and send it to me. :) Or at least report it in the SimpleMailer extension page. I will try to fix it as soon as I can. The same thing goes to suggestions or improvements.
 
 
-	Q: Do you have Twitter/Facebook/Email?
+Q: Why is your English so funny?
 
-	A: Yes I do.
+A: I'm not a native English speaker. I do speak some English, but my native language is Spanish. And if you think my English is funny you have to hear me trying to utter words in German or Russian. You will laugh your arse off. For sure.
 
 
-	Q: I have another question regarding this extension that is not in this FAQ. How can I contact you?
+Q: Do you have Twitter/Facebook/Email?
 
-	A: You can leave me a message here or at the Yii Forum SimpleMailer page.
+A: Yes I do.
+
+
+Q: I have another question regarding this extension that is not in this FAQ. How can I contact you?
+
+A: You can leave me a message here or at the Yii Forum SimpleMailer page.
 
