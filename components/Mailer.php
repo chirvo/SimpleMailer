@@ -1,10 +1,9 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * Mailer component
  * User: bigchirv
  * Date: 5/4/12
  * Time: 10:35 PM
- * To change this template use File | Settings | File Templates.
  */
 class Mailer extends CComponent
 {
